@@ -53,6 +53,13 @@ class InlineStyleExtension implements ExtensionInterface, RendererAwareInterface
             return "{gfm-extraction-$md5}";
         });
 
+        $text->replace('/\b(\S*)\b/', function(Text $w){
+            if(substr($w, 0, 1) != "_" && substr(strrev($w), 0, 1) != "_"){
+                $w->replaceString('_', '\\_');
+            }
+            return $w;
+        });
+        
         $text->replace('/(^(?! {4}|\t)\w+_\w+_\w[\w_]*)/', function (Text $w) {
             $underscores = $w->split('//')->filter(function (Text $item) {
                 return $item == '_';
