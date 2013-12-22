@@ -59,7 +59,7 @@ class InlineStyleExtension implements ExtensionInterface, RendererAwareInterface
             }
             return $w;
         });
-        
+
         $text->replace('/(^(?! {4}|\t)\w+_\w+_\w[\w_]*)/', function (Text $w) {
             $underscores = $w->split('//')->filter(function (Text $item) {
                 return $item == '_';
